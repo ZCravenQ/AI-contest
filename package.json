@@ -1,0 +1,14 @@
+{
+  "name": "ai-contest-yuxun",
+  "version": "6.1.0",
+  "private": true,
+  "type": "module",
+  "description": "余讯 6.1 · 如果只有 1% Battery 的极简交互网页作品",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node --test tests/packet-core.test.mjs tests/packet-v6.test.mjs tests/receipt-layout.test.mjs tests/scene-motion.test.mjs && node tests/ui.mjs"
+  }
+}
