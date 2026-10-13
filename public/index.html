@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f4f3ec">
+  <meta name="description" content="余讯 6.1：如果只有 1% Battery？从一份完整的分类消息里，留下最重要的话。">
+  <title>余讯 6.1 · 如果只有 1%</title>
+  <link rel="icon" href="./icon-v4.svg"><link rel="stylesheet" href="./last-packet.css"><link rel="stylesheet" href="./last-signal-v61.css">
+  <script type="module" src="./last-signal-v61.mjs"></script>
+</head>
+<body data-scene="1">
+  <a class="skip" href="#scene-title-1">跳到当前内容</a>
+  <div class="app-shell">
+    <header class="masthead">
+      <div class="brand" aria-label="余讯"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><strong>余讯</strong></div>
+      <nav class="chapters" aria-label="体验章节">
+        <button id="nav-1" class="chapter" type="button" aria-current="step">1%</button>
+        <button id="nav-2" class="chapter" type="button" disabled>整理</button>
+        <button id="nav-3" class="chapter" type="button" disabled>抵达</button>
+        <button id="nav-4" class="chapter" type="button" disabled>留下</button>
+      </nav>
+      <button id="about-open" type="button" class="about-button">关于</button>
+    </header>
+    <main id="stage" class="stage">
+
+      <section id="scene-1" class="scene question-scene" aria-labelledby="scene-title-1">
+        <div class="hero-layout motion-part">
+          <h1 id="scene-title-1" tabindex="-1" aria-label="如果只有 1% Battery？"><span class="hero-prompt">如果只有</span><span class="hero-number">1<span class="hero-percent">%</span></span><span class="hero-battery">Battery？</span></h1>
+          <p class="hero-thought">界面可以少一点。<br><span>什么信息，不能少？</span></p>
+        </div>
+        <div class="hero-bottom motion-part">
+          <div class="hero-caption"><p>把最后的空间，留给最重要的话。</p><p class="scenario-disclaimer">假设情境 · 未读取设备电量</p></div>
+          <div class="hero-actions"><button id="enter-minimal" class="primary-button" type="button"><span>留下最重要的</span><span class="icon" aria-hidden="true"></span></button><button id="restore-open" class="text-button" type="button" hidden>查看上次留下的便笺</button></div>
+        </div>
+      </section>
+
+
+      <section id="scene-2" class="scene compose-scene" aria-labelledby="scene-title-2" hidden inert>
+        <div class="scene-intro motion-part"><h1 id="scene-title-2" tabindex="-1">最后<br><span class="title-accent">一包。</span></h1><p class="scene-copy">先涵盖基本方面，<br>再带上更多。</p><div class="coverage-block"><p id="coverage-summary" role="status" aria-live="polite">基本方面 0 / 4</p><div id="coverage-list" class="coverage-list"></div><p class="coverage-help">检查的是分类覆盖，不替你判断内容是否足够。</p></div></div>
+        <div class="work-surface motion-part">
+          <div class="capacity-control"><div class="capacity-heading"><label for="budget">这一包的容量</label><div><output id="budget-value" for="budget">96</output><span class="unit"> B</span></div></div><input id="budget" type="range" min="64" max="512" step="16" value="96" aria-describedby="capacity-status" disabled></div>
+          <div class="message-heading"><span id="selection-count">已选 4 条</span><button id="recommend" class="quiet-button" type="button" aria-label="在容量内优先覆盖基本方面">优先覆盖基本方面</button></div>
+          <div id="message-list" class="message-grid" role="group" aria-label="分类消息，可选择或编辑"></div>
+          <div class="message-tools"><button id="add-message" class="text-button" type="button"><span class="icon icon-plus" aria-hidden="true"></span>写自己的消息</button><div id="draft-pager" class="pager"><button id="draft-prev" class="arrow-button" type="button" aria-label="上一组消息" disabled><span class="icon icon-left" aria-hidden="true"></span></button><span id="draft-page">1 / 2</span><button id="draft-next" class="arrow-button" type="button" aria-label="下一组消息"><span class="icon" aria-hidden="true"></span></button></div></div>
+          <div class="packet-capacity"><div class="capacity-description"><span id="capacity-status" role="status" aria-live="polite">正在准备消息…</span><button id="capacity-help" class="quiet-button" type="button">计算说明</button></div><div id="capacity-meter" class="capacity-meter" role="progressbar" aria-label="消息包已用容量" aria-valuemin="0" aria-valuemax="96" aria-valuenow="0"><div id="capacity-fill"></div></div></div>
+          <div class="compose-actions"><div><p id="draft-note">分类也计入容量，文字不自动删改。</p></div><button id="send" class="primary-button" type="button" disabled><span>送出这一包</span><span class="icon" aria-hidden="true"></span></button></div>
+        </div>
+      </section>
+
+      <section id="scene-3" class="scene receipt-scene" aria-labelledby="scene-title-3" hidden inert>
+        <div id="receipt-intro" class="scene-intro motion-part"><h1 id="scene-title-3" tabindex="-1">这些话，<br><span class="title-accent">抵达了。</span></h1><p id="receipt-summary" class="scene-copy"></p><div id="connection-indicator" class="connection"><span class="connection-dot" aria-hidden="true"></span><span id="connection-label">本地模拟连接</span></div><p id="receipt-hint" class="intro-bottom">断开后，同一份文字仍留在这里。</p></div>
+        <div class="result-surface motion-part"><article id="receipt-paper" class="receipt" aria-label="已接收的完整分类消息"><header class="receipt-heading"><span id="receipt-label">你的消息</span><span id="receipt-count"></span></header><div id="received-messages" class="receipt-messages"></div><footer class="receipt-footer"><span id="received-size"></span><div class="pager"><button id="received-prev" class="arrow-button" type="button" aria-label="接收消息上一页" disabled><span class="icon icon-left" aria-hidden="true"></span></button><span id="received-page">1 / 1</span><button id="received-next" class="arrow-button" type="button" aria-label="接收消息下一页" disabled><span class="icon" aria-hidden="true"></span></button></div></footer></article><div class="result-actions"><button id="edit-draft" class="text-button" type="button">返回整理</button><button id="disconnect" class="primary-button" type="button"><span>断开模拟连接</span><span class="icon" aria-hidden="true"></span></button><button id="download" class="primary-button" type="button" hidden><span>保存这张便笺</span><span class="icon icon-down" aria-hidden="true"></span></button></div><p id="receipt-storage" class="storage-note"></p></div>
+      </section>
+    </main>
+    <footer class="site-footer"><span>本地信息实验 / V6.1</span><span id="navigation-hint">左右方向键回看已开启的章节</span><a href="./review-v61.html">自检报告</a></footer>
+  </div>
+
+  <dialog id="edit-dialog" class="modal" aria-labelledby="edit-title"><form id="edit-form"><div class="modal-heading"><button id="edit-close" class="arrow-button" type="button" aria-label="取消编辑"><span class="icon icon-close" aria-hidden="true"></span></button></div><h2 id="edit-title">让这句话更像你。</h2><label for="message-category" class="input-label">分类</label><select id="message-category"><option value="safety">状态</option><option value="location">位置</option><option value="plan">下一步</option><option value="contact">联系</option><option value="life">生活</option><option value="later">稍后</option><option value="other">未分类</option></select><label for="message-text" class="input-label">完整消息</label><textarea id="message-text" rows="3" placeholder="例如：我在东门，平安。" aria-describedby="edit-help edit-error" required></textarea><div class="edit-meta"><span id="edit-help">最多 80 个字符、3 行；不自动截断。</span><span id="edit-counter">0 / 80</span></div><p id="edit-error" class="form-error" role="status"></p><div class="modal-actions"><button id="delete-message" class="quiet-button" type="button">删除这条消息</button><button id="edit-save" class="primary-button" type="submit">保存消息</button></div></form></dialog>
+  <dialog id="about-dialog" class="modal" aria-labelledby="about-title"><div class="modal-heading"><button id="about-close" class="arrow-button" type="button" aria-label="关闭说明"><span class="icon icon-close" aria-hidden="true"></span></button></div><h2 id="about-title">少一点，仍有要紧的话。</h2><p>这是一份虚构校园消息清单。你可以选择、改写和重新分类，决定最后一包装什么；不使用远程 AI 或通信服务器。</p><p>“1%”是一个假设问题，不读取设备电量，不与字节数换算。没有实测省电结果。界面只保留当前消息操作，没有后台轮询或循环动画。</p><p>容量按实际 UTF-8 文本、每条分类编号、长度及 CRC32 校验计算。推荐规则依次为：最多基本类别、最多消息、最少字节。它不是对信息价值或安全程度的保证。</p><p>发送和断开发生在同一页面。刷新可恢复最后一份已校验记录；托管版首次访问需要网络；本地源码版启动后可不依赖互联网。保存的文字文件可独立阅读。</p><button id="forget-open" class="quiet-button forget-button" type="button" disabled>清除本机接收记录</button><div class="modal-actions"><a class="text-button" href="./review-v61.html">完整自检报告</a><button id="about-done" class="primary-button" type="button">回到作品</button></div></dialog>
+  <dialog id="forget-dialog" class="modal" aria-labelledby="forget-title"><h2 id="forget-title">清除这份留存？</h2><p>清除页面和本机保存的接收记录，草稿仍保留。已经下载的文字文件不会被删除。</p><p id="forget-error" class="form-error" role="status"></p><div class="modal-actions"><button id="forget-cancel" class="text-button" type="button">保留记录</button><button id="forget-confirm" class="primary-button" type="button">清除记录</button></div></dialog>
+  <p id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+  <noscript><div class="no-script">此本地信息实验需要 JavaScript。启用后可整理分类消息和保存便笺。</div></noscript>
+</body>
+</html>

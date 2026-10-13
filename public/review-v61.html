@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4f3ec"><title>余讯 6.1 · 自检报告</title>
+  <link rel="icon" href="./icon-v4.svg"><link rel="stylesheet" href="./last-packet.css">
+  <style>
+    .report-shell{height:100dvh;width:min(100%,960px);margin:auto;padding:0 32px;display:grid;grid-template-rows:72px minmax(0,1fr) 68px}
+    .report-head,.report-foot{display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:13px}.report-head{border-bottom:1px solid var(--line)}.report-foot{border-top:1px solid var(--line)}.report-head a,.report-foot a{display:inline-flex;align-items:center;min-height:44px}.report-head strong{font-size:20px;margin-right:12px}.report-stage{position:relative;min-height:0}.report-page{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:28px 0;overflow-y:auto}.report-page h1,.report-page h2{font-family:inherit;font-size:clamp(28px,4vw,42px);font-weight:650;line-height:1.4;letter-spacing:-.025em;margin-bottom:24px;outline:none}.report-page p{font-size:17px;line-height:1.85;margin-bottom:20px;color:var(--muted)}.report-page strong{color:var(--ink);font-weight:600}.report-page .note{font-size:13px;margin-bottom:0}.report-page a{text-decoration:underline}.review-controls{display:flex;gap:8px;align-items:center}.review-controls output{min-width:38px;text-align:center;font-variant-numeric:tabular-nums}
+    @media(max-width:600px){.report-shell{padding:0 22px;grid-template-rows:60px minmax(0,1fr) 60px}.report-head,.report-foot{font-size:12px}.report-head strong{font-size:18px}.report-page{padding-block:20px}.report-page h1,.report-page h2{font-size:28px;margin-bottom:20px}.report-page p{font-size:15px;line-height:1.8;margin-bottom:18px}.report-page .note{font-size:12px}.review-controls{gap:2px}}
+    @media(max-height:600px){.report-shell{grid-template-rows:52px minmax(0,1fr) 52px}.report-page{justify-content:flex-start;padding-block:16px}.report-page h1,.report-page h2{font-size:25px;margin-bottom:14px}.report-page p{font-size:14px;line-height:1.7;margin-bottom:14px}}
+  </style>
+</head>
+<body>
+  <main class="report-shell">
+    <header class="report-head"><a href="./"><strong>余讯</strong> V6.1 自检报告</a><a href="./">回到作品</a></header>
+    <div class="report-stage">
+      <section class="report-page" aria-labelledby="review-title-0"><h1 id="review-title-0" tabindex="-1">直接面对这个问题。</h1><p><strong>如果只有 1% Battery？</strong> 本版以整屏文字海报开场，移除全景系统。整理、抵达、留下及分类消息操作保留。</p><p>巨幅“1%”承担视觉焦点，章节栏与页脚在开场退后。数字只首次揭示一次；按钮无需等待，回看也不会重演。</p><p class="note">延续 Taste Skill 与 Impeccable 的字体层级、克制运动、对象连续性指导。没有增加动画依赖。</p></section>
+      <section class="report-page" aria-labelledby="review-title-1" hidden inert><h2 id="review-title-1" tabindex="-1">改动有边界，交互有回归。</h2><p><strong>23 组新版 DOM 交互检查通过。</strong> 直接开场、一次性揭示、减弱动画、分类编辑、容量推荐、旧记录、发送快照、下载和失败反馈均有覆盖。</p><p>沿用完整消息编码、无损分页和同一张接收便笺。回到问题页再进入，已经编辑的草稿不会重置。</p><p class="note">另通过 49 项编码、分页、动效及历史回归测试。源码审查修正了首屏网格行与短屏高度风险；不等于真实浏览器验收。</p></section>
+      <section class="report-page" aria-labelledby="review-title-2" hidden inert><h2 id="review-title-2" tabindex="-1">可以带走，继续制作。</h2><p>交付源码包包含 HTML、CSS、JavaScript 模块、字体、图标和本地启动脚本。无需安装前端依赖；Python 3.8+ 或 Node.js 18+ 任选其一。</p><p>完整解压后双击 Windows 启动脚本，或运行 <strong>npm start</strong>。用浏览器打开 <strong>http://127.0.0.1:8080</strong>；编辑源文件、刷新即可。</p><p class="note">电量为假设，无真实通信与实测节电。当前未完成真实浏览器动画、短屏、软键盘验收。原托管站点仍为私人访问；本地包无需托管账号。</p></section>
+    </div>
+    <footer class="report-foot"><a href="./review-v61.txt" download="余讯-V6.1-自检报告.txt">下载完整报告</a><div class="review-controls"><button id="review-prev" class="arrow-button" type="button" aria-label="报告上一页" disabled><span class="icon icon-left" aria-hidden="true"></span></button><output id="review-page" aria-live="polite">1 / 3</output><button id="review-next" class="arrow-button" type="button" aria-label="报告下一页"><span class="icon" aria-hidden="true"></span></button></div></footer>
+  </main>
+  <script>
+    const slides = Array.from(document.querySelectorAll('.report-page'));
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let current = 0, active;
+    function show(index) {
+      if (index < 0 || index >= slides.length || index === current) return;
+      active?.cancel(); current = index;
+      slides.forEach((slide, i) => { slide.hidden = i !== current; slide.inert = i !== current; slide.setAttribute('aria-hidden', String(i !== current)); });
+      document.getElementById('review-prev').disabled = current === 0;
+      document.getElementById('review-next').disabled = current === slides.length - 1;
+      document.getElementById('review-page').textContent = `${current + 1} / ${slides.length}`;
+      if (!preference.matches && slides[current].animate) active = slides[current].animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:280,easing:'cubic-bezier(.22,1,.36,1)'});
+      document.getElementById(`review-title-${current}`).focus({preventScroll:true});
+    }
+    document.getElementById('review-prev').addEventListener('click', () => show(current - 1));
+    document.getElementById('review-next').addEventListener('click', () => show(current + 1));
+    preference.addEventListener?.('change', event => { if (event.matches) active?.cancel(); });
+    document.addEventListener('keydown', event => {
+      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.isComposing || event.defaultPrevented) return;
+      if (event.key === 'ArrowLeft') { event.preventDefault(); show(current - 1); }
+      if (event.key === 'ArrowRight') { event.preventDefault(); show(current + 1); }
+    });
+  </script>
+</body>
+</html>
